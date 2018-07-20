@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class planet : MonoBehaviour {
+    public Sprite[] sprites;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private SpriteRenderer spriteRenderer; 
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
+        var randomSprite = Random.Range(0, 3);
+        spriteRenderer.sprite = sprites[randomSprite];
+    }
 }
