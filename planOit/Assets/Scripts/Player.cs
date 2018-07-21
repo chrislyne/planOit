@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 
     public int resourceDepletionMultiplier;
 
-    private ResourceSet resources;
+    public ResourceSet resources;
 
     // Use this for initialization
     void Start() {
