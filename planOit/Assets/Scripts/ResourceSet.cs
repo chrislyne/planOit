@@ -23,6 +23,18 @@
         this.materials = materials;
     }
 
+    
+
+    public int getResourceByIndex(int index) {
+        switch(index) {
+            case 0: return oxygen;
+            case 1: return food;
+            case 2: return fuel;
+            case 3: return materials;
+            default: return 0;
+        }
+    }
+
     public override string ToString()
     {
         return "Food:" + food + " Oxygen:" + oxygen + " Fuel:"+ fuel + " Materials:" + materials;
