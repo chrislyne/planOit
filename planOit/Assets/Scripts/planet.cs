@@ -20,30 +20,36 @@ public class planet : MonoBehaviour {
     {
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
-        var randomSprite = Random.Range(0,2);
+        var randomSprite = Random.Range(0,5);
         spriteRenderer.sprite = sprites[randomSprite];
 
-        //resourceValue[1] = 10f;
+        //planet scale
+        float planetSize = Random.Range(0.5f,1.5f);
+        transform.localScale = new Vector3(planetSize,planetSize,planetSize);
+
         //planet resource UI
         int i = 0;
         foreach (float rv in resourceValue)
         {
-            //resourceValue[i] = 10f;
+            float randomResourceValue = Random.Range(0,200);
+            resourceValue[i] = randomResourceValue;
             RectTransform rt = resourceBar[i].GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(1, rv / 100);
-            resourceText[i].text = rv.ToString();
+            float iconSize = randomResourceValue / 200 + 0.8f;
+            rt.sizeDelta = new Vector2(iconSize, iconSize);
+            resourceText[i].text = randomResourceValue.ToString();
+            i++;
         }
     }
 
     public void Hover()
     {
         print("hover");
-        resourcesUI.transform.localScale = new Vector3(2,2,2);
+        resourcesUI.transform.localScale = new Vector3(3,3,3);
     }
     public void HoverOut()
     {
         print("hoverOut");
-        resourcesUI.transform.localScale = new Vector3(1, 1, 1);
+        resourcesUI.transform.localScale = new Vector3(2, 2, 2);
     }
 
     public void MoveCamera()
