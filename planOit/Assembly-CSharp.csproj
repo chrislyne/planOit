@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\moveCamera.cs" />
-    <Compile Include="Assets\Scripts\Planet.cs" />
+    <Compile Include="Assets\Scripts\planet.cs" />
     <Compile Include="Assets\Scripts\PlanetGenerator.cs" />
     <Compile Include="Assets\Scripts\PlayerState.cs" />
     <Compile Include="Assets\Scripts\ResourceSet.cs" />
