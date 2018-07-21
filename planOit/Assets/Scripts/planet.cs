@@ -26,6 +26,8 @@ public class Planet : MonoBehaviour
 
     private RectTransform[] resourceIconSizes;
 
+    private Button button;
+
     private enum PlanetType
     {
         BACON,
@@ -95,6 +97,7 @@ public class Planet : MonoBehaviour
             resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
         }
 
+        button = GetComponentInChildren<Button>();
     }
 
     public void Hover()
@@ -120,16 +123,19 @@ public class Planet : MonoBehaviour
         destinationLine.SetPosition(1, new Vector3(0, 0, 100));
     }
 
-    public void MoveCamera()
+    public void PlanetClicked()
     {
+        float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
+        if (playerState.resources.fuel < (int)(distanceToPlanet / DISTANCE_PER_FUEL))
+        {
+            // Not enough fuel.. Ignore
+            return;
+        }
+        playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
 
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         
-        // Subtract consumed Fuel
-        float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
-
-        playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
         playerState.StartGathering(this);
     }
 
@@ -145,8 +151,14 @@ public class Planet : MonoBehaviour
     public void updateSprite()
     {
         print (resources.ResourceTotal);
-        if(resources.ResourceTotal == 0){
-            spriteRenderer.sprite = damagedSprites03[(int)planetType];
+        if (resources.ResourceTotal == 0)
+        {
+            if (spriteRenderer.sprite != damagedSprites03[(int)planetType])
+            {
+                spriteRenderer.sprite = damagedSprites03[(int)planetType];
+                Image imageScript = button.GetComponentInChildren<Image>();
+                imageScript.raycastTarget = false;
+            }
         }
         else if (resources.ResourceTotal < 200)
         {
