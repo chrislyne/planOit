@@ -1631,7 +1631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2414df00e9d3634408cb4988d41a14dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetPrefab: {fileID: 114545540111980070, guid: fecc85eecd5b05347b9adda26817d51a,
+  planetPrefab: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
     type: 2}
 --- !u!4 &1939618191
 Transform:

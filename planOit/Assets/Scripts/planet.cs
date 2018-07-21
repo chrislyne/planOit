@@ -8,6 +8,9 @@ public class Planet : MonoBehaviour
     private Camera cam;
 
     public Sprite[] sprites;
+    public Sprite[] damagedSprites01;
+    public Sprite[] damagedSprites02;
+    public Sprite[] damagedSprites03;
     public GameObject spriteNode;
     public GameObject resourcesUI;
 
@@ -19,6 +22,7 @@ public class Planet : MonoBehaviour
     Planet currentPlanet;
 
     private Image spriteRenderer;
+    PlanetType planetType;
 
     private RectTransform[] resourceIconSizes;
 
@@ -42,7 +46,7 @@ public class Planet : MonoBehaviour
         cam = Camera.main;
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
-        PlanetType planetType = (PlanetType) Random.Range(0, (int)PlanetType.COUNT);
+        planetType = (PlanetType) Random.Range(0, (int)PlanetType.COUNT);
         spriteRenderer.sprite = sprites[(int)planetType];
 
         //planet scale
@@ -90,6 +94,7 @@ public class Planet : MonoBehaviour
             float iconSize = (float)resourceValue / 200.0f + 0.8f;
             resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
         }
+
     }
 
     public void Hover()
@@ -122,5 +127,21 @@ public class Planet : MonoBehaviour
             float iconSize = (float)resourceValue / 200.0f + 0.8f;
             resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
         }
+    }
+    public void updateSprite(int total)
+    {
+        print (total);
+        if(total == 0){
+            spriteRenderer.sprite = damagedSprites03[(int)planetType];
+        }
+        else if (total < 200)
+        {
+            spriteRenderer.sprite = damagedSprites02[(int)planetType];
+        }
+        else if (total < 400)
+        {
+            spriteRenderer.sprite = damagedSprites01[(int)planetType];
+        }
+
     }
 }
