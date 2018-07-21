@@ -37,7 +37,6 @@ public class PlayerState : MonoBehaviour {
         if (health <= 0)
         {
             CancelInvoke();
-            print("YOU DIED!");
             //TODO: End game
         }
 
@@ -55,7 +54,6 @@ public class PlayerState : MonoBehaviour {
 
     void ReduceHealth()
     {
-        print("health reduced!");
         health -= healthDamageRate;
     }
 
