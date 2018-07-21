@@ -18,4 +18,8 @@
         this.materials = materials;
     }
 
+    public override string ToString()
+    {
+        return "Food:" + food + " Oxygen:" + oxygen + " Fuel:"+ fuel + " Materials:" + materials;
+    }
 }

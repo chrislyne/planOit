@@ -6,6 +6,7 @@ public class planet : MonoBehaviour {
     public Sprite[] sprites;
 
     private SpriteRenderer spriteRenderer; 
+    private ResourceSet resources;
 
     void Start()
     {
