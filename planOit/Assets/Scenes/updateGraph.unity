@@ -534,8 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlanet: {fileID: 0}
-  health: 100
-  healthDamageRate: 10
+  health: 700
+  healthDamageRate: 50
   foodDepletionRate: 1
   oxygenDepletionRate: 1
   materialsDepletionRate: 1
