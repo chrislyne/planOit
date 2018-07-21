@@ -5,6 +5,11 @@
     public int fuel;
     public int materials;
 
+    public bool ResourceDepleted
+    {
+        get { return food <= 0 || oxygen <= 0 || fuel <= 0; }
+    }
+
     public int ResourceTotal
     {
         get {  return food + oxygen + fuel + materials; }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class planet : MonoBehaviour {
+public class Planet : MonoBehaviour {
     public Sprite[] sprites;
     public GameObject spriteNode;
     public GameObject cam;
