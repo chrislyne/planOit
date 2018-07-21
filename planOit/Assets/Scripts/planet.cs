@@ -4,10 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Planet : MonoBehaviour {
+    private Camera cam;
+
     public Sprite[] sprites;
     public GameObject spriteNode;
-    public GameObject cam;
     public GameObject resourcesUI;
+
+    public ResourceSet resources;
 
     public float[] resourceValue;
     public Text[] resourceText;
@@ -18,6 +21,7 @@ public class Planet : MonoBehaviour {
 
     void Start()
     {
+        cam = Camera.main;
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
         var randomSprite = Random.Range(0,5);

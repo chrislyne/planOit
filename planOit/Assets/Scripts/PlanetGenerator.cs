@@ -12,19 +12,19 @@ public class PlanetGenerator : MonoBehaviour
     private static readonly int MAX_RANDOM_PLANETS = 1000;
 
     private static readonly float MAX_X_DISTANCE = 1000.0f;
-    private static readonly float MIN_GAP = 40.0f;
-    private static readonly float MAX_GAP = 80.0f;
+    private static readonly float MIN_GAP = 30.0f;
+    private static readonly float MAX_GAP = 40.0f;
     private static readonly float MAX_Y_GAP = MIN_GAP; // +- Variation around Y axis
+    private static readonly float MIN_Z_DEPTH = 20.0f;
     private static readonly float MAX_Z_DEPTH = 60.0f;
 
     // Use this for initialization
     void Start ()
     {
-
-        Planet startPlanet = (Planet) Instantiate(planetPrefab, Vector3.zero, Quaternion.identity);
+        Planet startPlanet = (Planet) Instantiate(planetPrefab, new Vector3(0f, 0f, (MAX_Z_DEPTH + MIN_Z_DEPTH) / 2), Quaternion.identity);
         startPlanet.name = "Start Planet";
 
-        endPlanet = (Planet) Instantiate(planetPrefab, new Vector3(MAX_X_DISTANCE, 0f, 0f), Quaternion.identity);
+        endPlanet = (Planet) Instantiate(planetPrefab, new Vector3(MAX_X_DISTANCE, 0f, (MAX_Z_DEPTH + MIN_Z_DEPTH) / 2), Quaternion.identity);
         endPlanet.name = "End Planet";
 
         GenerateTree();
@@ -107,7 +107,7 @@ public class PlanetGenerator : MonoBehaviour
         // Actually create
         foreach (Vector3 position in prunedPositions) 
         {
-            Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(-MAX_Z_DEPTH, 0.0f));
+            Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(MIN_Z_DEPTH, MAX_Z_DEPTH));
             Planet planet = Instantiate(planetPrefab, posWithZ, Quaternion.identity);
             // TODO: Random Type
         }
