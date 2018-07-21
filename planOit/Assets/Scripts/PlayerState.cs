@@ -87,6 +87,20 @@ public class PlayerState : MonoBehaviour {
     public void StartGathering(Planet planet)
     {
         currentPlanet = planet;
-        // TODO: Consume resources over time
+        // Start consuming resources over time
+        InvokeRepeating("consumeFromCurrentPlanet", 0.5f, 0.5f);
     }
+
+    public void consumeFromCurrentPlanet()
+    {
+        resources.addFrom(currentPlanet.resources);
+        currentPlanet.updateIconSizes();
+
+        if (currentPlanet.resources.ResourceTotal == 0)
+        {
+            CancelInvoke("consumeFromCurrentPlanet");
+        }
+    }
+
+
 }
