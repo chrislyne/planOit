@@ -19,19 +19,46 @@ public class Planet : MonoBehaviour
 
     private Image spriteRenderer;
 
+    private enum PlanetType
+    {
+        BACON,
+        NACHOS,
+        SPOTTY,
+        STRIPE,
+        WAVY
+    }
 
     void Start()
     {
         cam = Camera.main;
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
-        var randomSprite = Random.Range(0, 5);
-        spriteRenderer.sprite = sprites[randomSprite];
+        PlanetType planetType = (PlanetType) Random.Range(0, 5);
+        spriteRenderer.sprite = sprites[(int)planetType];
 
         //planet scale
         float planetSize = Random.Range(0.5f, 1.5f);
         transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
+        ResourceSet resourceSet = new ResourceSet(
+            Random.Range(0, 200),
+            Random.Range(0, 200),
+            Random.Range(0, 200),
+            Random.Range(0, 200)
+            );
+        switch (planetType)
+        {
+            case PlanetType.BACON:
+                break;
+            case PlanetType.NACHOS:
+                break;
+            case PlanetType.SPOTTY:
+                break;
+            case PlanetType.STRIPE:
+                break;
+            case PlanetType.WAVY:
+                break;
+        }
         //planet resource UI
         int i = 0;
         foreach (float rv in resourceValue)
