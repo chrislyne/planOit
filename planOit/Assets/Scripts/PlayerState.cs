@@ -15,8 +15,11 @@ public class PlayerState : MonoBehaviour {
     public float resourceDepletionMultiplier;
 
     public GameObject[] resourceBars;
+    public GameObject healthBar;
 
     public ResourceSet resources;
+
+    private bool IsHealthDepleting = false;
 
     // Use this for initialization
     void Start() {
@@ -27,12 +30,20 @@ public class PlayerState : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (resources.ResourceDepleted)
+        if (resources.ResourceDepleted && !IsHealthDepleting)
         {
             InvokeRepeating("ReduceHealth", 0, 1);
-        } else
+            IsHealthDepleting = true;
+        }
+        else
         {
-            CancelInvoke("ReduceHealth");
+            if (!resources.ResourceDepleted) {
+                IsHealthDepleting = false;
+                CancelInvoke("ReduceHealth");
+            } else
+            {
+
+            }
         }
 
         if (health <= 0)
@@ -45,6 +56,8 @@ public class PlayerState : MonoBehaviour {
         resourceBars[1].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.food/10f, 1);
         resourceBars[2].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.fuel/10f, 1);
         resourceBars[3].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.materials/10f, 1);
+
+        healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(health/10f, 2);
     }
 
     void ExpendResources()
