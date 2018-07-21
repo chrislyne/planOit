@@ -5,23 +5,27 @@ using UnityEngine;
 public class PlanetGenerator : MonoBehaviour
 {
 
-    public Planet planetSource;            
-    private GameObject endPlanet;
+    public Planet planetPrefab;
+
+    private Planet endPlanet;
 
     private static readonly int MAX_RANDOM_PLANETS = 1000;
 
-    private static readonly float MAX_X_DISTANCE = 100.0f;
+    private static readonly float MAX_X_DISTANCE = 1000.0f;
     private static readonly float MIN_GAP = 40.0f;
     private static readonly float MAX_GAP = 80.0f;
-    private static readonly float MAX_Y_GAP = 5.0f; // Vertical Size of the Camera
+    private static readonly float MAX_Y_GAP = MIN_GAP; // +- Variation around Y axis
+    private static readonly float MAX_Z_DEPTH = 60.0f;
 
     // Use this for initialization
     void Start ()
     {
-        planetSource.gameObject.transform.position = Vector3.zero;
 
-        endPlanet = GameObject.Instantiate(planetSource.gameObject);
-        endPlanet.transform.position = new Vector3(MAX_X_DISTANCE, 0f, 0f);
+        Planet startPlanet = (Planet) Instantiate(planetPrefab, Vector3.zero, Quaternion.identity);
+        startPlanet.name = "Start Planet";
+
+        endPlanet = (Planet) Instantiate(planetPrefab, new Vector3(MAX_X_DISTANCE, 0f, 0f), Quaternion.identity);
+        endPlanet.name = "End Planet";
 
         GenerateTree();
     }
@@ -41,7 +45,7 @@ public class PlanetGenerator : MonoBehaviour
             planetPositions.Add(new Vector3(
                 Random.Range(0.0f, MAX_X_DISTANCE-MIN_GAP),
                 Random.Range(-MAX_Y_GAP, MAX_Y_GAP),
-                Random.Range(-80.0f, 0.0f)
+                0f
                 )
             );
         }
@@ -56,34 +60,55 @@ public class PlanetGenerator : MonoBehaviour
         }
 
         List<Vector3> prunedPositions = new List<Vector3>();
-        
-        for (int p = 0; p < MAX_RANDOM_PLANETS - 1; p++)
+
+        Vector3 currentPosition = Vector3.zero;
+
+        for (int p = 0; p < MAX_RANDOM_PLANETS; p++)
         {
-            prunedPositions.Add(planetPositions[p]);
-            while(p+1 < MAX_RANDOM_PLANETS)
+            if (Vector3.Magnitude(planetPositions[p] - currentPosition) <= MIN_GAP)
             {
-                if (Vector3.Magnitude(planetPositions[p + 1] - planetPositions[p]) <= MIN_GAP)
-                {
-                    // Too close
-                    p++;
-                    continue;
-                }
-                if (Vector3.Magnitude(planetPositions[p + 1] - planetPositions[p]) > MAX_GAP)
-                {
-                    // Too far
-                    p++;
-                    continue;
-                }
-                // Just right
-                break;
+                // Too close
+                p++;
+                continue;
             }
+            if (Vector3.Magnitude(planetPositions[p] - currentPosition) > MAX_GAP)
+            {
+                // Too far
+                p++;
+                continue;
+            }
+            // Just right
+            // But compare with all currently added:
+            bool tooClose = false;
+            foreach(Vector3 goodPos in prunedPositions)
+            {
+                if (Vector3.Magnitude(planetPositions[p] - goodPos) <= MIN_GAP)
+                {
+                    tooClose = true;
+                    break;
+                }
+            }
+            if (tooClose)
+            {
+                p++;
+                continue;
+            }
+            currentPosition = planetPositions[p];
+            prunedPositions.Add(currentPosition);
+
         }
-        
-        // Actually create
-        foreach(Vector3 position in prunedPositions) 
+        Debug.Log("Planets so far:" + prunedPositions.Count);
+        // Check distance to end planet
+        if (Vector3.Magnitude(currentPosition - endPlanet.transform.position) > MAX_GAP)
         {
-            GameObject planet = GameObject.Instantiate(planetSource.gameObject);
-            planet.transform.position = position;
+            Debug.LogError("Too far to end planet");
+        }
+
+        // Actually create
+        foreach (Vector3 position in prunedPositions) 
+        {
+            Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(-MAX_Z_DEPTH, 0.0f));
+            Planet planet = Instantiate(planetPrefab, posWithZ, Quaternion.identity);
             // TODO: Random Type
         }
     }
