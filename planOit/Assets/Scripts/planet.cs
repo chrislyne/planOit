@@ -7,6 +7,7 @@ public class Planet : MonoBehaviour {
     public Sprite[] sprites;
     public GameObject spriteNode;
     public GameObject cam;
+    public GameObject resourcesUI;
 
     public float[] resourceValue;
     public Text[] resourceText;
@@ -14,17 +15,6 @@ public class Planet : MonoBehaviour {
 
     private Image spriteRenderer;
 
-    public Vector3 Location
-    {
-        get
-        {
-            return gameObject.transform.position;
-        }
-        set
-        {
-            gameObject.transform.position = value;
-        }
-    }
 
     void Start()
     {
@@ -33,21 +23,34 @@ public class Planet : MonoBehaviour {
         var randomSprite = Random.Range(0,2);
         spriteRenderer.sprite = sprites[randomSprite];
 
+        //resourceValue[1] = 10f;
         //planet resource UI
         int i = 0;
         foreach (float rv in resourceValue)
         {
+            //resourceValue[i] = 10f;
             RectTransform rt = resourceBar[i].GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(1, rv/100);
+            rt.sizeDelta = new Vector2(1, rv / 100);
             resourceText[i].text = rv.ToString();
-            i++;
         }
-
     }
+
+    public void Hover()
+    {
+        print("hover");
+        resourcesUI.transform.localScale = new Vector3(2,2,2);
+    }
+    public void HoverOut()
+    {
+        print("hoverOut");
+        resourcesUI.transform.localScale = new Vector3(1, 1, 1);
+    }
+
     public void MoveCamera()
     {
-        print(transform.position.x);
+        //print(transform.position.x);
         Vector3 newPosition = new Vector3(transform.position.x,transform.position.y,-10);
-        cam.transform.position = newPosition; 
+        //cam.transform.position = newPosition; 
+        cam.GetComponent<moveCamera>().Targetposition = newPosition;
     }
 }
