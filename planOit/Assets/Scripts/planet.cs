@@ -20,6 +20,8 @@ public class Planet : MonoBehaviour
 
     private Image spriteRenderer;
 
+    private RectTransform[] resourceIconSizes;
+
     private enum PlanetType
     {
         BACON,
@@ -74,7 +76,8 @@ public class Planet : MonoBehaviour
 
         // # of Children expected to match # of resource types
         GameObject[] resourceObjects = new GameObject[resourcesUI.transform.childCount];
-        for(int c = 0; c < resourcesUI.transform.childCount; c++) {
+        resourceIconSizes = new RectTransform[resourcesUI.transform.childCount];
+        for (int c = 0; c < resourcesUI.transform.childCount; c++) {
             resourceObjects[c] = resourcesUI.transform.GetChild(c).gameObject;
 
             int resourceValue = resources.getResourceByIndex(c);
@@ -83,9 +86,9 @@ public class Planet : MonoBehaviour
             resourceTextUI.text = resourceValue.ToString();
 
             Image resourceImageUI = resourceObjects[c].GetComponentInChildren<Image>(true);
-            RectTransform rt = resourceImageUI.gameObject.GetComponent<RectTransform>();
+            resourceIconSizes[c] = resourceImageUI.gameObject.GetComponent<RectTransform>();
             float iconSize = (float)resourceValue / 200.0f + 0.8f;
-            rt.sizeDelta = new Vector2(iconSize, iconSize);
+            resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
         }
     }
 
@@ -109,5 +112,15 @@ public class Planet : MonoBehaviour
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         playerState.StartGathering(this);
+    }
+
+    public void updateIconSizes()
+    {
+        for (int c = 0; c < resourceIconSizes.Length; c++)
+        {
+            int resourceValue = resources.getResourceByIndex(c);
+            float iconSize = (float)resourceValue / 200.0f + 0.8f;
+            resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
+        }
     }
 }
