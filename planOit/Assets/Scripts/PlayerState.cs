@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour {
 
+    public Planet currentPlanet;
     public int health;
 
     public int foodDepletionRate;
@@ -57,8 +58,9 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    public void StartGathering()
+    public void StartGathering(Planet planet)
     {
-
+        currentPlanet = planet;
+        // TODO: Consume resources over time
     }
 }
