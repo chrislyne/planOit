@@ -1,8 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+<<<<<<< HEAD
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "planOit", "Assembly-CSharp.csproj", "{82A380FB-A9E2-3F49-0D58-E72EC0445707}"
 EndProject
+=======
+# Visual Studio 15
+>>>>>>> 64cec3d914b5160b6f93099192d9edbb1e0e000f
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
