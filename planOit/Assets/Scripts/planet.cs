@@ -17,6 +17,11 @@ public class Planet : MonoBehaviour
     public Text[] resourceText;
     public GameObject[] resourceBar;
 
+    public GameObject line;
+    private LineRenderer destinationLine;
+    PlayerState playerState;
+    Planet currentPlanet;
+
     private Image spriteRenderer;
 
     private enum PlanetType
@@ -30,10 +35,15 @@ public class Planet : MonoBehaviour
 
     void Start()
     {
+        //dotted line
+        destinationLine = GameObject.Find("Line").GetComponent<LineRenderer>();
+        playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
+
+
         cam = Camera.main;
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
-        PlanetType planetType = (PlanetType) Random.Range(0, 5);
+        PlanetType planetType = (PlanetType) Random.Range(0, 9);
         spriteRenderer.sprite = sprites[(int)planetType];
 
         //planet scale
@@ -75,20 +85,23 @@ public class Planet : MonoBehaviour
 
     public void Hover()
     {
-        print("hover");
+        currentPlanet = playerState.currentPlanet;
         resourcesUI.transform.localScale = new Vector3(3, 3, 3);
+        destinationLine.SetPosition(0, currentPlanet.transform.position);
+        destinationLine.SetPosition(1, transform.position);
     }
     public void HoverOut()
     {
-        print("hoverOut");
         resourcesUI.transform.localScale = new Vector3(2, 2, 2);
+        destinationLine.SetPosition(0, new Vector3(0, 0, 100));
+        destinationLine.SetPosition(1, new Vector3(0, 0, 100));
     }
 
     public void MoveCamera()
     {
-        //print(transform.position.x);
+
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
-        //cam.transform.position = newPosition; 
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
+        playerState.StartGathering(this);
     }
 }
