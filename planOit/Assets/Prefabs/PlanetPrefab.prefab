@@ -784,27 +784,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: fd0fbd18a91ac4782a92c69311ee0c38, type: 3}
+  - {fileID: 21300000, guid: 4e2c7e9f3dae64c64b5c3c7a6aa0b934, type: 3}
+  - {fileID: 21300000, guid: f53508a32a07d45d69413664604d2750, type: 3}
   - {fileID: 21300000, guid: 996ff2ad1ebf94736b9fa44daedd983f, type: 3}
-  - {fileID: 0}
   spriteNode: {fileID: 1167953425476258}
   resourcesUI: {fileID: 1043309491174368}
-  resourceValue:
-  - 0
-  - 0
-  - 0
-  - 0
-  resourceText:
-  - {fileID: 114002433940565510}
-  - {fileID: 114494862310147400}
-  - {fileID: 114444786204635902}
-  - {fileID: 114516242673316776}
-  resourceBar:
-  - {fileID: 1643427098615718}
-  - {fileID: 1518405544380320}
-  - {fileID: 1761400059721956}
-  - {fileID: 1073551658943162}
 --- !u!114 &114705759433122062
 MonoBehaviour:
   m_ObjectHideFlags: 1
