@@ -7,25 +7,24 @@ public class PlanetGenerator : MonoBehaviour
 
     public Planet planetPrefab;
 
-    private Planet endPlanet;
-
     private static readonly int MAX_RANDOM_PLANETS = 1000;
 
     private static readonly float MAX_X_DISTANCE = 1000.0f;
-    private static readonly float MIN_GAP = 40.0f;
+    private static readonly float MIN_GAP = 30.0f;
     private static readonly float MAX_GAP = 80.0f;
     private static readonly float MAX_Y_GAP = MIN_GAP; // +- Variation around Y axis
+    private static readonly float MIN_Z_DEPTH = 20.0f;
     private static readonly float MAX_Z_DEPTH = 60.0f;
+    private static readonly float MIDDLE_Z_DEPTH = (MAX_Z_DEPTH + MIN_Z_DEPTH) / 2;
 
     // Use this for initialization
     void Start ()
     {
-
-        Planet startPlanet = (Planet) Instantiate(planetPrefab, Vector3.zero, Quaternion.identity);
+        Planet startPlanet = (Planet) Instantiate(planetPrefab, new Vector3(0f, 0f, MIDDLE_Z_DEPTH), Quaternion.identity);
         startPlanet.name = "Start Planet";
 
-        endPlanet = (Planet) Instantiate(planetPrefab, new Vector3(MAX_X_DISTANCE, 0f, 0f), Quaternion.identity);
-        endPlanet.name = "End Planet";
+        PlayerState playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
+        playerState.currentPlanet = startPlanet;
 
         GenerateTree();
     }
@@ -50,7 +49,7 @@ public class PlanetGenerator : MonoBehaviour
             );
         }
 
-        planetPositions.Sort((a, b) => Vector3.Magnitude(a).CompareTo(Vector3.Magnitude(b)));
+        planetPositions.Sort((a, b) => a.x.CompareTo(b.x));
 
         if (planetPositions[0].magnitude > MAX_GAP) {
             // First node is too far, retry random gen
@@ -97,20 +96,24 @@ public class PlanetGenerator : MonoBehaviour
             prunedPositions.Add(currentPosition);
 
         }
-        Debug.Log("Planets so far:" + prunedPositions.Count);
-        // Check distance to end planet
-        if (Vector3.Magnitude(currentPosition - endPlanet.transform.position) > MAX_GAP)
-        {
-            Debug.LogError("Too far to end planet");
-        }
+        Debug.Log("Planets to be created:" + prunedPositions.Count);
+
+        // Create End Planet Based on last planet
+        Vector3 endPosition = currentPosition;
+        endPosition.x += MIN_GAP;
+        endPosition.z = MIDDLE_Z_DEPTH;
+        Planet endPlanet = Instantiate(planetPrefab, endPosition, Quaternion.identity);
+        endPlanet.name = "End Planet";
 
         // Actually create
-        foreach (Vector3 position in prunedPositions) 
+        for (int p = 0; p < prunedPositions.Count; p++) 
         {
-            Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(-MAX_Z_DEPTH, 0.0f));
+            Vector3 position = prunedPositions[p];
+            Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(MIN_Z_DEPTH, MAX_Z_DEPTH));
             Planet planet = Instantiate(planetPrefab, posWithZ, Quaternion.identity);
-            // TODO: Random Type
+            planet.name = "Planet #" + p;
         }
+
     }
 
 	// Update is called once per frame

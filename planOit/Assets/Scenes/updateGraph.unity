@@ -2099,6 +2099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  healthDamageRate: 10
   foodDepletionRate: 1
   oxygenDepletionRate: 1
   materialsDepletionRate: 1

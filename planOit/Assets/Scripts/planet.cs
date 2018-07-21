@@ -3,11 +3,15 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Planet : MonoBehaviour {
+public class Planet : MonoBehaviour
+{
+    private Camera cam;
+
     public Sprite[] sprites;
     public GameObject spriteNode;
-    public GameObject cam;
     public GameObject resourcesUI;
+
+    public ResourceSet resources;
 
     public float[] resourceValue;
     public Text[] resourceText;
@@ -15,23 +19,51 @@ public class Planet : MonoBehaviour {
 
     private Image spriteRenderer;
 
+    private enum PlanetType
+    {
+        BACON,
+        NACHOS,
+        SPOTTY,
+        STRIPE,
+        WAVY
+    }
 
     void Start()
     {
+        cam = Camera.main;
         //planet sprite
         spriteRenderer = spriteNode.GetComponent<Image>();
-        var randomSprite = Random.Range(0,5);
-        spriteRenderer.sprite = sprites[randomSprite];
+        PlanetType planetType = (PlanetType) Random.Range(0, 5);
+        spriteRenderer.sprite = sprites[(int)planetType];
 
         //planet scale
-        float planetSize = Random.Range(0.5f,1.5f);
-        transform.localScale = new Vector3(planetSize,planetSize,planetSize);
+        float planetSize = Random.Range(0.5f, 1.5f);
+        transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
+        ResourceSet resourceSet = new ResourceSet(
+            Random.Range(0, 200),
+            Random.Range(0, 200),
+            Random.Range(0, 200),
+            Random.Range(0, 200)
+            );
+        switch (planetType)
+        {
+            case PlanetType.BACON:
+                break;
+            case PlanetType.NACHOS:
+                break;
+            case PlanetType.SPOTTY:
+                break;
+            case PlanetType.STRIPE:
+                break;
+            case PlanetType.WAVY:
+                break;
+        }
         //planet resource UI
         int i = 0;
         foreach (float rv in resourceValue)
         {
-            float randomResourceValue = Random.Range(0,200);
+            float randomResourceValue = Random.Range(0, 200);
             resourceValue[i] = randomResourceValue;
             RectTransform rt = resourceBar[i].GetComponent<RectTransform>();
             float iconSize = randomResourceValue / 200 + 0.8f;
@@ -44,7 +76,7 @@ public class Planet : MonoBehaviour {
     public void Hover()
     {
         print("hover");
-        resourcesUI.transform.localScale = new Vector3(3,3,3);
+        resourcesUI.transform.localScale = new Vector3(3, 3, 3);
     }
     public void HoverOut()
     {
@@ -55,7 +87,7 @@ public class Planet : MonoBehaviour {
     public void MoveCamera()
     {
         //print(transform.position.x);
-        Vector3 newPosition = new Vector3(transform.position.x,transform.position.y,-10);
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         //cam.transform.position = newPosition; 
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
     }
