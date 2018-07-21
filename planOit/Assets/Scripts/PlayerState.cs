@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour {
 
     public int health;
+    public int healthDamageRate;
 
     public int foodDepletionRate;
     public int oxygenDepletionRate;
@@ -25,8 +26,17 @@ public class PlayerState : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (health <= 0 || resources.ResourceDepleted)
+        if (resources.ResourceDepleted)
         {
+            InvokeRepeating("ReduceHealth", 0, 1);
+        } else
+        {
+            CancelInvoke("ReduceHealth");
+        }
+
+        if (health <= 0)
+        {
+            CancelInvoke();
             print("YOU DIED!");
             //TODO: End game
         }
@@ -41,7 +51,12 @@ public class PlayerState : MonoBehaviour {
     {
         resources.oxygen -= Mathf.RoundToInt(oxygenDepletionRate*resourceDepletionMultiplier);
         resources.food -= Mathf.RoundToInt(foodDepletionRate*resourceDepletionMultiplier);
-        resources.materials -= Mathf.RoundToInt(materialsDepletionRate*resourceDepletionMultiplier);
+    }
+
+    void ReduceHealth()
+    {
+        print("health reduced!");
+        health -= healthDamageRate;
     }
 
     void SpendFuel(int amountToUse)
