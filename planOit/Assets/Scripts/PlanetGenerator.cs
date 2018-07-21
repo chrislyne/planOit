@@ -13,7 +13,7 @@ public class PlanetGenerator : MonoBehaviour
 
     private static readonly float MAX_X_DISTANCE = 1000.0f;
     private static readonly float MIN_GAP = 30.0f;
-    private static readonly float MAX_GAP = 40.0f;
+    private static readonly float MAX_GAP = 80.0f;
     private static readonly float MAX_Y_GAP = MIN_GAP; // +- Variation around Y axis
     private static readonly float MIN_Z_DEPTH = 20.0f;
     private static readonly float MAX_Z_DEPTH = 60.0f;
@@ -97,11 +97,26 @@ public class PlanetGenerator : MonoBehaviour
             prunedPositions.Add(currentPosition);
 
         }
-        Debug.Log("Planets so far:" + prunedPositions.Count);
+        Debug.Log("Planets to be created:" + prunedPositions.Count);
         // Check distance to end planet
         if (Vector3.Magnitude(currentPosition - endPlanet.transform.position) > MAX_GAP)
         {
-            Debug.LogError("Too far to end planet");
+            // After checking "the last one, check through all"
+            bool tooFar = true;
+            foreach (Vector3 goodPos in prunedPositions)
+            {
+                if (Vector3.Magnitude(goodPos - endPlanet.transform.position) <= MAX_GAP)
+                {
+                    tooFar = false;
+                    break;
+                }
+            }
+            if (tooFar)
+            {
+                Debug.LogError("Last node is too far, retry random gen");
+                //GenerateTree();
+                //return;
+            }
         }
 
         // Actually create
