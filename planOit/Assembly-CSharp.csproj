@@ -62,15 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\moveCamera.cs" />
-    <Compile Include="Assets\Scripts\planet.cs" />
+    <Compile Include="Assets\Scripts\Planet.cs" />
     <Compile Include="Assets\Scripts\PlanetGenerator.cs" />
     <Compile Include="Assets\Scripts\PlayerState.cs" />
     <Compile Include="Assets\Scripts\ResourceSet.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/Hiroto/Documents/Git/planOit/planOit/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Hiroto/Documents/Git/planOit/planOit/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/Source/KiwiJam18/planOit/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>E:/Source/KiwiJam18/planOit/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
@@ -271,13 +268,13 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/Hiroto/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>C:/Users/garet/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/Hiroto/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/garet/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.purchasing@2.0.1/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
-      <HintPath>C:/Users/Hiroto/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/garet/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
