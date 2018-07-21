@@ -96,12 +96,16 @@ public class PlayerState : MonoBehaviour {
         resources.addFrom(currentPlanet.resources);
         currentPlanet.updateIconSizes();
 
-        currentPlanet.updateSprite(currentPlanet.resources.ResourceTotal);
+        currentPlanet.updateSprite();
         if (currentPlanet.resources.ResourceTotal == 0)
         {
             CancelInvoke("consumeFromCurrentPlanet");
         }
+    }
 
+    public void startEvent()
+    {
+        Debug.Log("TODO: startEvent");
     }
 
 

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
+    private static readonly float DISTANCE_PER_FUEL = 0.5f;
     private Camera cam;
 
     public Sprite[] sprites;
@@ -19,7 +20,6 @@ public class Planet : MonoBehaviour
     public GameObject line;
     private LineRenderer destinationLine;
     PlayerState playerState;
-    Planet currentPlanet;
 
     private Image spriteRenderer;
     PlanetType planetType;
@@ -99,10 +99,19 @@ public class Planet : MonoBehaviour
 
     public void Hover()
     {
-        currentPlanet = playerState.currentPlanet;
         resourcesUI.transform.localScale = new Vector3(3, 3, 3);
-        destinationLine.SetPosition(0, currentPlanet.transform.position);
-        destinationLine.SetPosition(1, transform.position);
+        // Check distance before drawing line
+        float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
+
+        if (playerState.resources.fuel * DISTANCE_PER_FUEL >= distanceToPlanet)
+        {
+            destinationLine.SetPosition(0, playerState.currentPlanet.transform.position);
+            destinationLine.SetPosition(1, transform.position);
+        } else
+        {
+            Debug.Log("Not enough fuel to go distance: " + distanceToPlanet + " only enough for distance: " + (playerState.resources.fuel * DISTANCE_PER_FUEL));
+        }
+        
     }
     public void HoverOut()
     {
@@ -116,6 +125,11 @@ public class Planet : MonoBehaviour
 
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
+        
+        // Subtract consumed Fuel
+        float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
+
+        playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
         playerState.StartGathering(this);
     }
 
@@ -128,19 +142,24 @@ public class Planet : MonoBehaviour
             resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
         }
     }
-    public void updateSprite(int total)
+    public void updateSprite()
     {
-        print (total);
-        if(total == 0){
+        print (resources.ResourceTotal);
+        if(resources.ResourceTotal == 0){
             spriteRenderer.sprite = damagedSprites03[(int)planetType];
         }
-        else if (total < 200)
+        else if (resources.ResourceTotal < 200)
         {
             spriteRenderer.sprite = damagedSprites02[(int)planetType];
         }
-        else if (total < 400)
+        else if (resources.ResourceTotal < 400)
         {
-            spriteRenderer.sprite = damagedSprites01[(int)planetType];
+            if (spriteRenderer.sprite != damagedSprites01[(int)planetType])
+            {
+                spriteRenderer.sprite = damagedSprites01[(int)planetType];
+                // Start Event
+                playerState.startEvent();
+            }
         }
 
     }
