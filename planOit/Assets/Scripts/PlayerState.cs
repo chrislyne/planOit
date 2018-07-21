@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour {
 
+    public int health;
+
     public int foodDepletionRate;
     public int oxygenDepletionRate;
     public int materialsDepletionRate;
@@ -22,6 +24,13 @@ public class PlayerState : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (health <= 0 || resources.ResourceDepleted)
+        {
+            print("YOU DIED!");
+            //TODO: End game
+        }
+
         resourceBars[0].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.oxygen/10f, 1);
         resourceBars[1].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.food/10f, 1);
         resourceBars[2].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.fuel/10f, 1);
@@ -46,5 +55,10 @@ public class PlayerState : MonoBehaviour {
             //TODO: failure state?
             print("No more fuel.");
         }
+    }
+
+    public void StartGathering()
+    {
+
     }
 }
