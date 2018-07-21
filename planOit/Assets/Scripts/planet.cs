@@ -14,6 +14,7 @@ public class planet : MonoBehaviour {
 
     private Image spriteRenderer;
 
+
     void Start()
     {
         //planet sprite
@@ -26,16 +27,18 @@ public class planet : MonoBehaviour {
         foreach (float rv in resourceValue)
         {
             RectTransform rt = resourceBar[i].GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(1, rv/100);
+            rt.sizeDelta = new Vector2(1, rv / 100);
             resourceText[i].text = rv.ToString();
-            i++;
         }
-
     }
+
+
+
     public void MoveCamera()
     {
-        print(transform.position.x);
+        //print(transform.position.x);
         Vector3 newPosition = new Vector3(transform.position.x,transform.position.y,-10);
-        cam.transform.position = newPosition; 
+        //cam.transform.position = newPosition; 
+        cam.GetComponent<moveCamera>().Targetposition = newPosition;
     }
 }

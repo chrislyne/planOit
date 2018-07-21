@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	public void NextPlanet () {
-        transform.Translate(1f, 0, 0);
-	}
+    public bool camera_move_enabled;
+    public Vector3 Targetposition;
+
+    public float speed = 2f;
+
+    void Update()
+    {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(Targetposition.x, Targetposition.y, -10), speed * Time.deltaTime);
+    }
 }
