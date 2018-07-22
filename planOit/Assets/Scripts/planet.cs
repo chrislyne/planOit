@@ -52,6 +52,7 @@ public class planet : MonoBehaviour
         SPOTTY,
         STRIPE,
         WAVY,
+        DONUT,
         COUNT // Why must I Hack?
     }
 
@@ -117,13 +118,13 @@ public class planet : MonoBehaviour
                     resources.food = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.SPOTTY:
-                    resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
+                    resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.STRIPE:
                     resources.materials = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.WAVY:
-                    resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
+                    resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
             }
 
