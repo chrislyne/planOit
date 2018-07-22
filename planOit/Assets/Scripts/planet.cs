@@ -164,6 +164,8 @@ public class planet : MonoBehaviour
         strawAnimator.SetTrigger("playStraw");
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
+        ship.GetComponent<MoveShip>().Targetposition = new Vector3(transform.position.x, transform.position.y, transform.position.z-1);
+
         
         playerState.StartGathering(this);
 
