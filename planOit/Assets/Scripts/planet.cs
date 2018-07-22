@@ -16,6 +16,10 @@ public class Planet : MonoBehaviour
 
     public ResourceSet resources;
 
+    GameObject ship;
+    GameObject straw;
+    Animator strawAnimator;
+
     public GameObject line;
     private LineRenderer destinationLine;
     PlayerState playerState;
@@ -42,6 +46,10 @@ public class Planet : MonoBehaviour
         destinationLine = GameObject.Find("Line").GetComponent<LineRenderer>();
         playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
 
+        //ship
+        ship = GameObject.Find("Rocket");
+        straw = GameObject.Find("RocketSprite");
+        strawAnimator = straw.GetComponent<Animator>();
 
         cam = Camera.main;
         //planet sprite
@@ -113,9 +121,11 @@ public class Planet : MonoBehaviour
 
     public void MoveCamera()
     {
-
+        strawAnimator.SetTrigger("endStraw");
+        strawAnimator.SetTrigger("playStraw");
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
+        ship.GetComponent<MoveShip>().Targetposition = new Vector3(transform.position.x, transform.position.y, transform.position.z-1);
         playerState.StartGathering(this);
     }
 
