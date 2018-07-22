@@ -30,6 +30,11 @@ public class PlayerState : MonoBehaviour {
     private GameObject popupCanvas;
     private Text popupText;
 
+    private bool gameStopped = false;
+
+    private GameObject winScreen;
+    private GameObject loseScreen;
+
     // Use this for initialization
     void Start() {
         resources = new ResourceSet(250, 250, 250, 250);
@@ -38,11 +43,26 @@ public class PlayerState : MonoBehaviour {
         popupCanvas = GameObject.Find("PopUpCanvas");
         popupText = GameObject.Find("PopUpText").GetComponent<Text>();
         popupCanvas.SetActive(false);
+
+        Transform[] screenTransforms = GameObject.Find("/Screens/Canvas").GetComponentsInChildren<Transform>(true);
+        foreach(Transform transform in screenTransforms)
+        {
+            if (transform.name == "WinScreen")
+            {
+                winScreen = transform.gameObject;
+            } else if (transform.name == "LoseScreen")
+            {
+                loseScreen = transform.gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
     void Update() {
-
+        if (gameStopped)
+        {
+            return;
+        }
         if (resources.ResourceDepleted && !IsHealthDepleting)
         {
             InvokeRepeating("ReduceHealth", 0, 0.5f);
@@ -61,8 +81,7 @@ public class PlayerState : MonoBehaviour {
 
         if (health <= 0)
         {
-            CancelInvoke();
-            //TODO: End game
+            stopGameLoop(false);
         }
 
         resourceBars[0].GetComponent<RectTransform>().sizeDelta = new Vector2(resources.oxygen/10f, 1);
@@ -89,7 +108,7 @@ public class PlayerState : MonoBehaviour {
         currentPlanet = planet;
         if (planet.isEndPlanet)
         {
-            Debug.Log("TODO: SHOW WIN SCREEN");
+            stopGameLoop(true);
         }
         else
         {
@@ -185,5 +204,17 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-
+    private void stopGameLoop(bool success)
+    {
+        gameStopped = true;
+        CancelInvoke();
+        Debug.Log("Game stopped with status = " + success);
+        if (success)
+        {
+            winScreen.SetActive(true);
+        } else
+        {
+            loseScreen.SetActive(true);
+        }
+    }
 }
