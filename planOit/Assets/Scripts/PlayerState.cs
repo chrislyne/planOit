@@ -94,9 +94,8 @@ public class PlayerState : MonoBehaviour {
     public void consumeFromCurrentPlanet()
     {
         resources.addFrom(currentPlanet.resources);
-        currentPlanet.updateIconSizes();
 
-        currentPlanet.updateSprite();
+        currentPlanet.updateUI();
         if (currentPlanet.resources.ResourceTotal == 0)
         {
             CancelInvoke("consumeFromCurrentPlanet");

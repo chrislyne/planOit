@@ -16,6 +16,7 @@ public class Planet : MonoBehaviour
     public GameObject resourcesUI;
 
     public ResourceSet resources;
+    public bool alive = true;
 
     public GameObject line;
     private LineRenderer destinationLine;
@@ -98,10 +99,16 @@ public class Planet : MonoBehaviour
         }
 
         button = GetComponentInChildren<Button>();
+
+        updateUI();
     }
 
     public void Hover()
     {
+        if (!alive)
+        {
+            return;
+        }
         resourcesUI.transform.localScale = new Vector3(3, 3, 3);
         // Check distance before drawing line
         float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
@@ -125,6 +132,11 @@ public class Planet : MonoBehaviour
 
     public void PlanetClicked()
     {
+        if (!alive)
+        {
+            return;
+        }
+
         float distanceToPlanet = Vector3.Magnitude(playerState.currentPlanet.transform.position - transform.position);
         if (playerState.resources.fuel < (int)(distanceToPlanet / DISTANCE_PER_FUEL))
         {
@@ -139,8 +151,19 @@ public class Planet : MonoBehaviour
         playerState.StartGathering(this);
     }
 
+    public void updateUI()
+    {
+        updateSprite(); // Decides if alive, which is needed for icons
+        updateIconSizes();
+    }
+
     public void updateIconSizes()
     {
+        if (!alive)
+        {
+            resourcesUI.gameObject.SetActive(false);
+            return;
+        }
         for (int c = 0; c < resourceIconSizes.Length; c++)
         {
             int resourceValue = resources.getResourceByIndex(c);
@@ -150,9 +173,9 @@ public class Planet : MonoBehaviour
     }
     public void updateSprite()
     {
-        print (resources.ResourceTotal);
-        if (resources.ResourceTotal == 0)
+        if (!alive || resources.ResourceTotal == 0)
         {
+            alive = false;
             if (spriteRenderer.sprite != damagedSprites03[(int)planetType])
             {
                 spriteRenderer.sprite = damagedSprites03[(int)planetType];

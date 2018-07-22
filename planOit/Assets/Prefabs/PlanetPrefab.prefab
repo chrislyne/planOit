@@ -453,6 +453,7 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
   spriteNode: {fileID: 1919088483632320}
   resourcesUI: {fileID: 1786309433302756}
+  alive: 1
   line: {fileID: 0}
 --- !u!114 &114210386776205040
 MonoBehaviour:

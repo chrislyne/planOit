@@ -811,11 +811,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4624122162435438, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
       propertyPath: m_LocalPosition.x
       value: -82.7
@@ -848,56 +843,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 795281924}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlanetClicked
-      objectReference: {fileID: 0}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 795281925}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114826587600464932, guid: fee4c8310d4c04396b6858996c98d1fd,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &795281924 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
-    type: 2}
-  m_PrefabInternal: {fileID: 795281923}
-  m_Script: {fileID: 11500000, guid: b9d336aa46b99462ebf38018df5b7a3a, type: 3}
---- !u!114 &795281925 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114210386776205040, guid: fee4c8310d4c04396b6858996c98d1fd,
-    type: 2}
-  m_PrefabInternal: {fileID: 795281923}
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &941854657
 GameObject:
   m_ObjectHideFlags: 0
