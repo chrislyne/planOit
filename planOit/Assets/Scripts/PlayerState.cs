@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using planOit;
 
 public class PlayerState : MonoBehaviour {
 
@@ -74,6 +75,40 @@ public class PlayerState : MonoBehaviour {
     public void StartGathering(Planet planet)
     {
         currentPlanet = planet;
-        // TODO: Consume resources over time
+        // Start consuming resources over time
+        InvokeRepeating("consumeFromCurrentPlanet", 0.5f, 0.5f);
+    }
+
+    public void consumeFromCurrentPlanet()
+    {
+        resources.addFrom(currentPlanet.resources);
+
+        currentPlanet.updateUI();
+        if (currentPlanet.resources.ResourceTotal == 0)
+        {
+            CancelInvoke("consumeFromCurrentPlanet");
+        }
+    }
+
+    public void startEvent(PlanetEventType eventType)
+    {
+        switch(eventType)
+        {
+            case PlanetEventType.BONUS_RESOURCES:
+            case PlanetEventType.BONUS_RESOURCES2:
+                Debug.Log("TODO: Show BONUS_RESOURCES UI");
+                Debug.Log("TODO: Instantly give the user some of a resource type");
+                break;
+            case PlanetEventType.RESOURCE_PENALTY:
+                Debug.Log("TODO: Show RESOURCE_PENALTY UI");
+                Debug.Log("TODO: Instantly take some of a resource type from the user");
+                break;
+            case PlanetEventType.ALIEN_ATTACK:
+                Debug.Log("TODO: Show ALIEN_ATTACK UI");
+                Debug.Log("TODO: Start attacking the user");
+                break;
+            default:
+                break;
+        }
     }
 }
