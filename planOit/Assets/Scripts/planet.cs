@@ -6,6 +6,11 @@ using planOit;
 
 public class Planet : MonoBehaviour
 {
+    public int minResource;
+    public int maxResource;
+    public int minSpecialResource;
+    public int maxSpecialResource;
+
     private static readonly float DISTANCE_PER_FUEL = 0.5f;
     private Camera cam;
 
@@ -68,27 +73,27 @@ public class Planet : MonoBehaviour
         transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
         resources = new ResourceSet(
-            Random.Range(0, 200),
-            Random.Range(0, 200),
-            Random.Range(0, 200),
-            Random.Range(0, 200)
+            Random.Range(minResource, maxResource),
+            Random.Range(minResource, maxResource),
+            Random.Range(minResource, maxResource),
+            Random.Range(minResource, maxResource)
             );
         switch (planetType)
         {
             case PlanetType.BACON:
-                resources.food = Random.Range(200, 300);
+                resources.food = Random.Range(minSpecialResource, maxSpecialResource);
                 break;
             case PlanetType.NACHOS:
-                resources.food = Random.Range(200, 300);
+                resources.food = Random.Range(minSpecialResource, maxSpecialResource);
                 break;
             case PlanetType.SPOTTY:
-                resources.fuel = Random.Range(200, 300);
+                resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
                 break;
             case PlanetType.STRIPE:
-                resources.materials = Random.Range(200, 300);
+                resources.materials = Random.Range(minSpecialResource, maxSpecialResource);
                 break;
             case PlanetType.WAVY:
-                resources.oxygen = Random.Range(200, 300);
+                resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
                 break;
         }
 

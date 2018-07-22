@@ -427,6 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d336aa46b99462ebf38018df5b7a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minResource: 0
+  maxResource: 200
+  minSpecialResource: 200
+  maxSpecialResource: 400
   sprites:
   - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
   - {fileID: 21300000, guid: 79629553916d4491d8a84f7d57469a56, type: 3}
