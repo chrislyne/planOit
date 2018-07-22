@@ -453,6 +453,7 @@ MonoBehaviour:
   - {fileID: 21300006, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
   spriteNode: {fileID: 1919088483632320}
   resourcesUI: {fileID: 1786309433302756}
+  alive: 1
   line: {fileID: 0}
 --- !u!114 &114210386776205040
 MonoBehaviour:
@@ -725,19 +726,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114138678724939256}
-        m_MethodName: MoveCamera
+        m_MethodName: PlanetClicked
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 114210386776205040}
-        m_MethodName: set_raycastTarget
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
