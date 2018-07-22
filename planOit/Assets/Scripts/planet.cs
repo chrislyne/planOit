@@ -161,8 +161,8 @@ public class Planet : MonoBehaviour
         }
         playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
 
-        strawAnimator.SetTrigger("endStraw");
-        strawAnimator.SetTrigger("playStraw");
+        strawAnimator.Play("strawPlay",-1, 0f);
+
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         ship.GetComponent<MoveShip>().Targetposition = new Vector3(transform.position.x, transform.position.y, transform.position.z-1);
