@@ -76,7 +76,7 @@ public class PlayerState : MonoBehaviour {
         health -= healthDamageRate;
     }
 
-    public void StartGathering(Planet planet)
+    public void StartGathering(planet planet)
     {
         currentPlanet = planet;
         // Start consuming resources over time
