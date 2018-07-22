@@ -87,8 +87,15 @@ public class PlayerState : MonoBehaviour {
     public void StartGathering(planet planet)
     {
         currentPlanet = planet;
-        // Start consuming resources over time
-        InvokeRepeating("consumeFromCurrentPlanet", 0.5f, 0.5f);
+        if (planet.isEndPlanet)
+        {
+            Debug.Log("TODO: SHOW WIN SCREEN");
+        }
+        else
+        {
+            // Start consuming resources over time
+            InvokeRepeating("consumeFromCurrentPlanet", 0.5f, 0.5f);
+        }
     }
 
     public void consumeFromCurrentPlanet()

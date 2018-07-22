@@ -104,6 +104,7 @@ public class PlanetGenerator : MonoBehaviour
         endPosition.x += MIN_GAP;
         endPosition.z = MIDDLE_Z_DEPTH;
         planet endPlanet = Instantiate(planetPrefab, endPosition, Quaternion.identity);
+        endPlanet.setEndPlanet();
         endPlanet.name = "End Planet";
 
         // Actually create

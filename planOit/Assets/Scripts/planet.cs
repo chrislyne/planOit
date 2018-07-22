@@ -42,6 +42,8 @@ public class planet : MonoBehaviour
 
     private Button button;
 
+    public bool isEndPlanet = false;
+
     private enum PlanetType
     {
         BACON,
@@ -64,60 +66,77 @@ public class planet : MonoBehaviour
         strawAnimator = straw.GetComponent<Animator>();
 
         cam = Camera.main;
-        //planet sprite
+        
+        
+
         spriteRenderer = spriteNode.GetComponent<Image>();
-        planetType = (PlanetType) Random.Range(0, (int)PlanetType.COUNT);
-        spriteRenderer.sprite = sprites[(int)planetType];
 
-        //planet scale
-        float planetSize = Random.Range(0.5f, 1.5f);
-        transform.localScale = new Vector3(planetSize, planetSize, planetSize);
-
-        resources = new ResourceSet(
-            Random.Range(minResource, maxResource),
-            Random.Range(minResource, maxResource),
-            Random.Range(minResource, maxResource),
-            Random.Range(minResource, maxResource)
-            );
-        switch (planetType)
+        if (isEndPlanet)
         {
-            case PlanetType.BACON:
-                resources.food = Random.Range(minSpecialResource, maxSpecialResource);
-                break;
-            case PlanetType.NACHOS:
-                resources.food = Random.Range(minSpecialResource, maxSpecialResource);
-                break;
-            case PlanetType.SPOTTY:
-                resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
-                break;
-            case PlanetType.STRIPE:
-                resources.materials = Random.Range(minSpecialResource, maxSpecialResource);
-                break;
-            case PlanetType.WAVY:
-                resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
-                break;
+            //planet scale
+            float planetSize = Random.Range(4.0f, 4.0f);
+            transform.localScale = new Vector3(planetSize, planetSize, planetSize);
+
+            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/end_planet");
         }
+        else
+        {
+            //planet scale
+            float planetSize = Random.Range(0.5f, 1.5f);
+            transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
-        // # of Children expected to match # of resource types
-        GameObject[] resourceObjects = new GameObject[resourcesUI.transform.childCount];
-        resourceIconSizes = new RectTransform[resourcesUI.transform.childCount];
-        for (int c = 0; c < resourcesUI.transform.childCount; c++) {
-            resourceObjects[c] = resourcesUI.transform.GetChild(c).gameObject;
+            //planet sprite
+            planetType = (PlanetType)Random.Range(0, (int)PlanetType.COUNT);
+            spriteRenderer.sprite = sprites[(int)planetType];
 
-            int resourceValue = resources.getResourceByIndex(c);
-           
-            Text resourceTextUI = resourceObjects[c].GetComponentInChildren<Text>(true);
-            resourceTextUI.text = resourceValue.ToString();
+            resources = new ResourceSet(
+                Random.Range(minResource, maxResource),
+                Random.Range(minResource, maxResource),
+                Random.Range(minResource, maxResource),
+                Random.Range(minResource, maxResource)
+                );
+            switch (planetType)
+            {
+                case PlanetType.BACON:
+                    resources.food = Random.Range(minSpecialResource, maxSpecialResource);
+                    break;
+                case PlanetType.NACHOS:
+                    resources.food = Random.Range(minSpecialResource, maxSpecialResource);
+                    break;
+                case PlanetType.SPOTTY:
+                    resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
+                    break;
+                case PlanetType.STRIPE:
+                    resources.materials = Random.Range(minSpecialResource, maxSpecialResource);
+                    break;
+                case PlanetType.WAVY:
+                    resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
+                    break;
+            }
 
-            Image resourceImageUI = resourceObjects[c].GetComponentInChildren<Image>(true);
-            resourceIconSizes[c] = resourceImageUI.gameObject.GetComponent<RectTransform>();
-            float iconSize = (float)resourceValue / 200.0f + 0.8f;
-            resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
+            // # of Children expected to match # of resource types
+            GameObject[] resourceObjects = new GameObject[resourcesUI.transform.childCount];
+            resourceIconSizes = new RectTransform[resourcesUI.transform.childCount];
+            for (int c = 0; c < resourcesUI.transform.childCount; c++)
+            {
+                resourceObjects[c] = resourcesUI.transform.GetChild(c).gameObject;
+
+                int resourceValue = resources.getResourceByIndex(c);
+
+                Text resourceTextUI = resourceObjects[c].GetComponentInChildren<Text>(true);
+                resourceTextUI.text = resourceValue.ToString();
+
+                Image resourceImageUI = resourceObjects[c].GetComponentInChildren<Image>(true);
+                resourceIconSizes[c] = resourceImageUI.gameObject.GetComponent<RectTransform>();
+                float iconSize = (float)resourceValue / 200.0f + 0.8f;
+                resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
+            }
+            updateUI();
         }
+        
 
         button = GetComponentInChildren<Button>();
 
-        updateUI();
     }
 
     public void Hover()
@@ -161,14 +180,12 @@ public class planet : MonoBehaviour
             return;
         }
         playerState.resources.fuel -= FUEL_PER_JUMP;
-
-        strawAnimator.Play("strawPlay",-1, 0f);
-
+        
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         ship.GetComponent<MoveShip>().Targetposition = new Vector3(transform.position.x, transform.position.y, transform.position.z-1);
 
-        
+        strawAnimator.Play("strawPlay", -1, 0f);
         playerState.StartGathering(this);
 
         if (planetEvent == PlanetEventType.ALIEN_ATTACK)
@@ -180,6 +197,10 @@ public class planet : MonoBehaviour
 
     public void updateUI()
     {
+        if (isEndPlanet)
+        {
+            return; // No UI Changes
+        }
         updateSprite(); // Decides if alive, which is needed for icons
         updateIconSizes();
     }
@@ -237,5 +258,12 @@ public class planet : MonoBehaviour
             }
         }
 
+    }
+
+    public void setEndPlanet()
+    {
+        isEndPlanet = true;
+        // Hide Resources
+        resourcesUI.gameObject.SetActive(false);
     }
 }
