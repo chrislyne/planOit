@@ -14,7 +14,6 @@ public class PlayerState : MonoBehaviour {
     public int foodDepletionRate;
     public int oxygenDepletionRate;
     public int materialsDepletionRate;
-    public float fuelSpendMultiplier;
 
     public float resourceDepletionMultiplier;
 
@@ -33,8 +32,8 @@ public class PlayerState : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        resources = new ResourceSet(100, 100, 100, 100);
-        InvokeRepeating("ExpendResources", 0, 0.5f);
+        resources = new ResourceSet(250, 250, 250, 250);
+        InvokeRepeating("ExpendResources", 0, 1);
 
         popupCanvas = GameObject.Find("PopUpCanvas");
         popupText = GameObject.Find("PopUpText").GetComponent<Text>();
@@ -76,26 +75,13 @@ public class PlayerState : MonoBehaviour {
 
     void ExpendResources()
     {
-        resources.oxygen -= Mathf.RoundToInt(oxygenDepletionRate*resourceDepletionMultiplier);
-        resources.food -= Mathf.RoundToInt(foodDepletionRate*resourceDepletionMultiplier);
+        if (resources.oxygen > 0) resources.oxygen -= Mathf.RoundToInt(oxygenDepletionRate*resourceDepletionMultiplier);
+        if (resources.food > 0) resources.food -= Mathf.RoundToInt(foodDepletionRate*resourceDepletionMultiplier);
     }
 
     void ReduceHealth()
     {
         health -= healthDamageRate;
-    }
-
-    void SpendFuel(int amountToUse)
-    {
-        if (resources.fuel > amountToUse)
-        {
-            resources.fuel -= Mathf.CeilToInt(amountToUse*fuelSpendMultiplier);
-        }
-        else
-        {
-            //TODO: failure state?
-            print("No more fuel.");
-        }
     }
 
     public void StartGathering(planet planet)

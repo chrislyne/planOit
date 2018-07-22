@@ -12,6 +12,8 @@ public class planet : MonoBehaviour
     public int maxSpecialResource;
 
     private static readonly float DISTANCE_PER_FUEL = 0.5f;
+    private static readonly int FUEL_PER_JUMP = 120;
+
     private Camera cam;
 
     public Sprite[] sprites;
@@ -158,10 +160,10 @@ public class planet : MonoBehaviour
             // Not enough fuel.. Ignore
             return;
         }
-        playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
+        playerState.resources.fuel -= FUEL_PER_JUMP;
 
-        strawAnimator.SetTrigger("endStraw");
-        strawAnimator.SetTrigger("playStraw");
+        strawAnimator.Play("strawPlay",-1, 0f);
+
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         ship.GetComponent<MoveShip>().Targetposition = new Vector3(transform.position.x, transform.position.y, transform.position.z-1);

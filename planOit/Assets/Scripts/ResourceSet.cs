@@ -1,5 +1,7 @@
 ﻿public class ResourceSet {
 
+    private static readonly int MAX_RESOURCE_AMOUT = 500;
+
     public int food;
     public int oxygen;
     public int fuel;
@@ -45,6 +47,7 @@
             oxygen += RESOURCE_PER_SECOND;
             other.oxygen -= RESOURCE_PER_SECOND;
         }
+        if (oxygen > MAX_RESOURCE_AMOUT) oxygen = MAX_RESOURCE_AMOUT;
 
         // food
         if (other.food < RESOURCE_PER_SECOND)
@@ -57,6 +60,7 @@
             food += RESOURCE_PER_SECOND;
             other.food -= RESOURCE_PER_SECOND;
         }
+        if (food > MAX_RESOURCE_AMOUT) food = MAX_RESOURCE_AMOUT;
 
         // fuel
         if (other.fuel < RESOURCE_PER_SECOND)
@@ -69,6 +73,8 @@
             fuel += RESOURCE_PER_SECOND;
             other.fuel -= RESOURCE_PER_SECOND;
         }
+        if (fuel > MAX_RESOURCE_AMOUT) fuel = MAX_RESOURCE_AMOUT;
+
         // materials
         if (other.materials < RESOURCE_PER_SECOND)
         {
@@ -79,6 +85,7 @@
             materials += RESOURCE_PER_SECOND;
             other.materials -= RESOURCE_PER_SECOND;
         }
+        if (materials > MAX_RESOURCE_AMOUT) materials = MAX_RESOURCE_AMOUT;
     }
 
 
