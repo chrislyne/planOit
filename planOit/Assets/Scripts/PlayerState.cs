@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using planOit;
+using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour {
 
@@ -27,10 +28,17 @@ public class PlayerState : MonoBehaviour {
     private static readonly int MATERIAL_PER_REPAIR = 25;
     private static readonly int HEALTH_PER_REPAIR = 10;
 
+    private GameObject popupCanvas;
+    private Text popupText;
+
     // Use this for initialization
     void Start() {
         resources = new ResourceSet(100, 100, 100, 100);
         InvokeRepeating("ExpendResources", 0, 0.5f);
+
+        popupCanvas = GameObject.Find("PopUpCanvas");
+        popupText = GameObject.Find("PopUpText").GetComponent<Text>();
+        popupCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -114,12 +122,44 @@ public class PlayerState : MonoBehaviour {
         {
             case PlanetEventType.BONUS_RESOURCES:
             case PlanetEventType.BONUS_RESOURCES2:
-                Debug.Log("TODO: Show BONUS_RESOURCES UI");
-                Debug.Log("TODO: Instantly give the user some of a resource type");
+                showPopup("Good news everyone! Something good happened and now you have more of something!");
+                int resourceToAdd = Random.Range(0, 4);
+                int RESOURCES_TO_ADD = 50;
+                switch(resourceToAdd)
+                {
+                    case 0:
+                        resources.oxygen += RESOURCES_TO_ADD;
+                        break;
+                    case 1:
+                        resources.food += RESOURCES_TO_ADD;
+                        break;
+                    case 2:
+                        resources.fuel += RESOURCES_TO_ADD;
+                        break;
+                    case 3:
+                        resources.materials += RESOURCES_TO_ADD;
+                        break;
+                }
                 break;
             case PlanetEventType.RESOURCE_PENALTY:
-                Debug.Log("TODO: Show RESOURCE_PENALTY UI");
-                Debug.Log("TODO: Instantly take some of a resource type from the user");
+                showPopup("Funny story! Something bad happened and now you have less of something!");
+                int resourceToTake = Random.Range(0, 4);
+                int RESOURCES_TO_TAKE = -50;
+                switch (resourceToTake)
+                {
+                    case 0:
+                        resources.oxygen += RESOURCES_TO_TAKE;
+                        break;
+                    case 1:
+                        resources.food += RESOURCES_TO_TAKE;
+                        break;
+                    case 2:
+                        resources.fuel += RESOURCES_TO_TAKE;
+                        break;
+                    case 3:
+                        resources.materials += RESOURCES_TO_TAKE;
+                        break;
+                }
                 break;
             case PlanetEventType.ALIEN_ATTACK:
                 Debug.Log("TODO: Show ALIEN_ATTACK UI");
@@ -128,6 +168,19 @@ public class PlayerState : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    private void showPopup(string message)
+    {
+        StartCoroutine(showPopupInternal(message));
+    }
+
+    private IEnumerator showPopupInternal(string message)
+    {
+        popupCanvas.SetActive(true);
+        popupText.text = message;
+        yield return new WaitForSeconds(5);
+        popupCanvas.SetActive(false);
     }
 
     public void TryToRepair()

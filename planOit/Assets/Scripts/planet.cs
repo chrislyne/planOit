@@ -213,7 +213,7 @@ public class planet : MonoBehaviour
         {
             spriteRenderer.sprite = damagedSprites02[(int)planetType];
         }
-        else if (resources.ResourceTotal < 400)
+        else if (resources.IsNoLongerFull)
         {
             if (spriteRenderer.sprite != damagedSprites01[(int)planetType])
             {

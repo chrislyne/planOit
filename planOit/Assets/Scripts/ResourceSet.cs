@@ -5,6 +5,8 @@
     public int fuel;
     public int materials;
 
+    private int startingTotal;
+
     public bool ResourceDepleted
     {
         get { return food <= 0 || oxygen <= 0 || fuel <= 0; }
@@ -15,12 +17,18 @@
         get {  return food + oxygen + fuel + materials; }
     }
 
+    public bool IsNoLongerFull
+    {
+        get { return ResourceTotal < startingTotal; }
+    }
+
     public ResourceSet(int fuel, int oxygen, int food, int materials)
     {
         this.fuel = fuel;
         this.oxygen = oxygen;
         this.food = food;
         this.materials = materials;
+        startingTotal = ResourceTotal;
     }
 
     private static readonly int RESOURCE_PER_SECOND = 25;
