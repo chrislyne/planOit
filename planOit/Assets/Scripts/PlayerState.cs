@@ -11,6 +11,7 @@ public class PlayerState : MonoBehaviour {
     public int foodDepletionRate;
     public int oxygenDepletionRate;
     public int materialsDepletionRate;
+    public float fuelSpendMultiplier;
 
     public float resourceDepletionMultiplier;
 
@@ -24,7 +25,7 @@ public class PlayerState : MonoBehaviour {
     // Use this for initialization
     void Start() {
         resources = new ResourceSet(100, 100, 100, 100);
-        InvokeRepeating("ExpendResources", 0, 1);
+        InvokeRepeating("ExpendResources", 0, 0.5f);
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class PlayerState : MonoBehaviour {
 
         if (resources.ResourceDepleted && !IsHealthDepleting)
         {
-            InvokeRepeating("ReduceHealth", 0, 1);
+            InvokeRepeating("ReduceHealth", 0, 0.5f);
             IsHealthDepleting = true;
         }
         else
@@ -75,7 +76,7 @@ public class PlayerState : MonoBehaviour {
     {
         if (resources.fuel > amountToUse)
         {
-            resources.fuel -= amountToUse;
+            resources.fuel -= Mathf.CeilToInt(amountToUse*fuelSpendMultiplier);
         }
         else
         {
