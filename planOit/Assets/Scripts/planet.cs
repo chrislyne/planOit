@@ -42,7 +42,8 @@ public class planet : MonoBehaviour
 
     private Button button;
 
-    public bool isEndPlanet = false;
+    public bool isSpecialPlanet = false;
+    public bool isEndPlanet = false; // special & true == start planet
 
     private enum PlanetType
     {
@@ -73,13 +74,25 @@ public class planet : MonoBehaviour
 
         spriteRenderer = spriteNode.GetComponent<Image>();
 
-        if (isEndPlanet)
+        if (isSpecialPlanet)
         {
-            //planet scale
-            float planetSize = Random.Range(4.0f, 4.0f);
-            transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
-            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/end_planet");
+            if (isEndPlanet)
+            {
+                //planet scale
+                float planetSize = Random.Range(4.0f, 4.0f);
+                transform.localScale = new Vector3(planetSize, planetSize, planetSize);
+
+                spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/end_planet");
+            }
+            else
+            {
+                //planet scale
+                float planetSize = Random.Range(3.0f, 3.0f);
+                transform.localScale = new Vector3(planetSize, planetSize, planetSize);
+
+                spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/start_planet");
+            }
         }
         else
         {
@@ -195,7 +208,7 @@ public class planet : MonoBehaviour
 
     public void updateUI()
     {
-        if (isEndPlanet)
+        if (isSpecialPlanet)
         {
             return; // No UI Changes
         }
@@ -260,7 +273,17 @@ public class planet : MonoBehaviour
 
     public void setEndPlanet()
     {
-        isEndPlanet = true;
+        isSpecialPlanet = true;
+        isEndPlanet = false;
+        // Hide Resources
+        resourcesUI.gameObject.SetActive(false);
+    }
+
+    public void setStartPlanet()
+    {
+        isSpecialPlanet = true;
+        alive = false;
+        
         // Hide Resources
         resourcesUI.gameObject.SetActive(false);
     }
