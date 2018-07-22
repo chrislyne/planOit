@@ -61,8 +61,6 @@ public class planet : MonoBehaviour
         destinationLine = GameObject.Find("Line").GetComponent<LineRenderer>();
         playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
 
-        button = GetComponentInChildren<Button>();
-
         //ship
         ship = GameObject.Find("Rocket");
         straw = GameObject.Find("RocketSprite");
@@ -148,6 +146,10 @@ public class planet : MonoBehaviour
             }
             updateUI();
         }
+        
+
+        button = GetComponentInChildren<Button>();
+
     }
 
     public void Hover()
