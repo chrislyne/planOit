@@ -22,7 +22,7 @@ public class PlanetGenerator : MonoBehaviour
     {
         planet startPlanet = (planet) Instantiate(planetPrefab, new Vector3(0f, 0f, MIDDLE_Z_DEPTH), Quaternion.identity);
         startPlanet.name = "Start Planet";
-        startPlanet.alive = false;
+        startPlanet.setStartPlanet();
 
         PlayerState playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
         playerState.currentPlanet = startPlanet;

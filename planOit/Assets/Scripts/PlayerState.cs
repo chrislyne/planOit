@@ -38,7 +38,7 @@ public class PlayerState : MonoBehaviour {
     // Use this for initialization
     void Start() {
         resources = new ResourceSet(250, 250, 250, 250);
-        InvokeRepeating("ExpendResources", 0, 1);
+        InvokeRepeating("ExpendResources", 0, 0.75f);
 
         popupCanvas = GameObject.Find("PopUpCanvas");
         popupText = GameObject.Find("PopUpText").GetComponent<Text>();
@@ -103,8 +103,14 @@ public class PlayerState : MonoBehaviour {
         health -= healthDamageRate;
     }
 
+    void AlienAttack()
+    {
+        health -= healthDamageRate;
+    }
+
     public void StartGathering(planet planet)
     {
+        CancelInvoke("AlienAttack"); // cancel damage when moving to new planet
         currentPlanet = planet;
         if (planet.isEndPlanet)
         {
@@ -175,7 +181,9 @@ public class PlayerState : MonoBehaviour {
                 break;
             case PlanetEventType.ALIEN_ATTACK:
                 Debug.Log("TODO: Show ALIEN_ATTACK UI");
+                showPopup("Indiginous aliens are not happy about you depleting their resources, and start attacking you.");
                 Debug.Log("TODO: Start attacking the user");
+                InvokeRepeating("AlienAttack", 0, 0.5f);
                 break;
             default:
                 break;
@@ -208,6 +216,7 @@ public class PlayerState : MonoBehaviour {
     {
         gameStopped = true;
         CancelInvoke();
+        GameObject.Find("HUD").SetActive(false);
         Debug.Log("Game stopped with status = " + success);
         if (success)
         {
