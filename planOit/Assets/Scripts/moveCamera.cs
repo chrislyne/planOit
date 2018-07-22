@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour {
 
-    public bool camera_move_enabled;
     public Vector3 Targetposition;
 
     public float speed = 2f;

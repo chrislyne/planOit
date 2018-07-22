@@ -23,6 +23,68 @@
         this.materials = materials;
     }
 
+    private static readonly int RESOURCE_PER_SECOND = 25;
+    public void addFrom(ResourceSet other)
+    {
+        // oxygen
+        if (other.oxygen < RESOURCE_PER_SECOND)
+        {
+            oxygen += other.oxygen;
+            other.oxygen = 0;
+        }
+        else
+        {
+            oxygen += RESOURCE_PER_SECOND;
+            other.oxygen -= RESOURCE_PER_SECOND;
+        }
+
+        // food
+        if (other.food < RESOURCE_PER_SECOND)
+        {
+            food += other.food;
+            other.food = 0;
+        }
+        else
+        {
+            food += RESOURCE_PER_SECOND;
+            other.food -= RESOURCE_PER_SECOND;
+        }
+
+        // fuel
+        if (other.fuel < RESOURCE_PER_SECOND)
+        {
+            fuel += other.fuel;
+            other.fuel = 0;
+        }
+        else
+        {
+            fuel += RESOURCE_PER_SECOND;
+            other.fuel -= RESOURCE_PER_SECOND;
+        }
+        // materials
+        if (other.materials < RESOURCE_PER_SECOND)
+        {
+            materials += other.materials;
+            other.materials = 0;
+        } else
+        {
+            materials += RESOURCE_PER_SECOND;
+            other.materials -= RESOURCE_PER_SECOND;
+        }
+    }
+
+
+
+    public int getResourceByIndex(int index) {
+        switch(index) {
+            case 0: return oxygen;
+            case 1: return food;
+            case 2: return fuel;
+            case 3: return materials;
+            default: return 0;
+        }
+    }
+
     public override string ToString()
     {
         return "Food:" + food + " Oxygen:" + oxygen + " Fuel:"+ fuel + " Materials:" + materials;

@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 4927652464845624}
   - component: {fileID: 114374854819131922}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: planet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d336aa46b99462ebf38018df5b7a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   sprites:
   - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
   - {fileID: 21300000, guid: 4e2c7e9f3dae64c64b5c3c7a6aa0b934, type: 3}
@@ -507,7 +508,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 996ff2ad1ebf94736b9fa44daedd983f, type: 3}
   - {fileID: 21300000, guid: fd0fbd18a91ac4782a92c69311ee0c38, type: 3}
   spriteNode: {fileID: 1445225873237000}
-  cam: {fileID: 0}
   resourcesUI: {fileID: 1251813433868594}
   resourceValue:
   - 0
@@ -524,6 +524,11 @@ MonoBehaviour:
   - {fileID: 1192243855102904}
   - {fileID: 1724330465963514}
   - {fileID: 1633865630517398}
+  line: {fileID: 0}
+  destinationLine: {fileID: 0}
+  playerState: {fileID: 0}
+  currentPlanet: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &114409865216281794
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -20,9 +20,14 @@ public class Planet : MonoBehaviour
     public bool alive = true;
     private PlanetEventType planetEvent = PlanetEventType.UNSET;
 
+    GameObject ship;
+    GameObject straw;
+    Animator strawAnimator;
+
     public GameObject line;
     private LineRenderer destinationLine;
     PlayerState playerState;
+    Planet currentPlanet;
 
     private Image spriteRenderer;
     PlanetType planetType;
@@ -47,6 +52,10 @@ public class Planet : MonoBehaviour
         destinationLine = GameObject.Find("Line").GetComponent<LineRenderer>();
         playerState = GameObject.Find("HUD").GetComponent<PlayerState>();
 
+        //ship
+        ship = GameObject.Find("Rocket");
+        straw = GameObject.Find("RocketSprite");
+        strawAnimator = straw.GetComponent<Animator>();
 
         cam = Camera.main;
         //planet sprite
@@ -147,6 +156,8 @@ public class Planet : MonoBehaviour
         }
         playerState.resources.fuel -= (int)(distanceToPlanet / DISTANCE_PER_FUEL);
 
+        strawAnimator.SetTrigger("endStraw");
+        strawAnimator.SetTrigger("playStraw");
         Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, -10);
         cam.GetComponent<moveCamera>().Targetposition = newPosition;
         
