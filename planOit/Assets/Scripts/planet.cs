@@ -277,7 +277,7 @@ public class planet : MonoBehaviour
     public void setEndPlanet()
     {
         isSpecialPlanet = true;
-        isEndPlanet = false;
+        isEndPlanet = true;
         // Hide Resources
         resourcesUI.gameObject.SetActive(false);
     }
