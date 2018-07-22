@@ -5,7 +5,7 @@ using planOit;
 
 public class PlayerState : MonoBehaviour {
 
-    public Planet currentPlanet;
+    public planet currentPlanet;
     public int health;
     public int healthDamageRate;
 
@@ -86,7 +86,7 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    public void StartGathering(Planet planet)
+    public void StartGathering(planet planet)
     {
         currentPlanet = planet;
         // Start consuming resources over time

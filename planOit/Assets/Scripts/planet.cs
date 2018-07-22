@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using planOit;
 
-public class Planet : MonoBehaviour
+public class planet : MonoBehaviour
 {
     public int minResource;
     public int maxResource;
@@ -32,7 +32,6 @@ public class Planet : MonoBehaviour
     public GameObject line;
     private LineRenderer destinationLine;
     PlayerState playerState;
-    Planet currentPlanet;
 
     private Image spriteRenderer;
     PlanetType planetType;

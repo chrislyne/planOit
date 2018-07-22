@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlanetGenerator : MonoBehaviour
 {
 
-    public Planet planetPrefab;
+    public planet planetPrefab;
 
     private static readonly int MAX_RANDOM_PLANETS = 1000;
 
@@ -20,7 +20,7 @@ public class PlanetGenerator : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        Planet startPlanet = (Planet) Instantiate(planetPrefab, new Vector3(0f, 0f, MIDDLE_Z_DEPTH), Quaternion.identity);
+        planet startPlanet = (planet) Instantiate(planetPrefab, new Vector3(0f, 0f, MIDDLE_Z_DEPTH), Quaternion.identity);
         startPlanet.name = "Start Planet";
         startPlanet.alive = false;
 
@@ -103,7 +103,7 @@ public class PlanetGenerator : MonoBehaviour
         Vector3 endPosition = currentPosition;
         endPosition.x += MIN_GAP;
         endPosition.z = MIDDLE_Z_DEPTH;
-        Planet endPlanet = Instantiate(planetPrefab, endPosition, Quaternion.identity);
+        planet endPlanet = Instantiate(planetPrefab, endPosition, Quaternion.identity);
         endPlanet.name = "End Planet";
 
         // Actually create
@@ -111,7 +111,7 @@ public class PlanetGenerator : MonoBehaviour
         {
             Vector3 position = prunedPositions[p];
             Vector3 posWithZ = new Vector3(position.x, position.y, Random.Range(MIN_Z_DEPTH, MAX_Z_DEPTH));
-            Planet planet = Instantiate(planetPrefab, posWithZ, Quaternion.identity);
+            planet planet = Instantiate(planetPrefab, posWithZ, Quaternion.identity);
             planet.name = "Planet #" + p;
         }
 
