@@ -1,6 +1,6 @@
 ﻿public class ResourceSet {
 
-    private static readonly int MAX_RESOURCE_AMOUT = 500;
+    public static readonly int MAX_RESOURCE_AMOUT = 500;
 
     public int food;
     public int oxygen;
