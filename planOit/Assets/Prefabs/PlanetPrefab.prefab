@@ -437,28 +437,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4e2c7e9f3dae64c64b5c3c7a6aa0b934, type: 3}
   - {fileID: 21300000, guid: f53508a32a07d45d69413664604d2750, type: 3}
   - {fileID: 21300000, guid: 996ff2ad1ebf94736b9fa44daedd983f, type: 3}
-  - {fileID: 21300000, guid: 996ff2ad1ebf94736b9fa44daedd983f, type: 3}
+  - {fileID: 21300000, guid: e1f33a5765bc14b1db1a3c28731cf985, type: 3}
   damagedSprites01:
-  - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
+  - {fileID: 21300002, guid: b20da2b32549b48529c9fd8c816a1e87, type: 3}
   - {fileID: 21300002, guid: 79629553916d4491d8a84f7d57469a56, type: 3}
   - {fileID: 21300002, guid: 9ade1c3dde88249798c22ec5b504a602, type: 3}
   - {fileID: 21300002, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
   - {fileID: 21300002, guid: 55646b18e7c4648afb78fb733dc3e76e, type: 3}
-  - {fileID: 21300002, guid: 55646b18e7c4648afb78fb733dc3e76e, type: 3}
+  - {fileID: 21300002, guid: e1f33a5765bc14b1db1a3c28731cf985, type: 3}
   damagedSprites02:
-  - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
+  - {fileID: 21300004, guid: b20da2b32549b48529c9fd8c816a1e87, type: 3}
   - {fileID: 21300004, guid: 79629553916d4491d8a84f7d57469a56, type: 3}
   - {fileID: 21300004, guid: 9ade1c3dde88249798c22ec5b504a602, type: 3}
   - {fileID: 21300004, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
   - {fileID: 21300004, guid: 55646b18e7c4648afb78fb733dc3e76e, type: 3}
-  - {fileID: 21300004, guid: 55646b18e7c4648afb78fb733dc3e76e, type: 3}
+  - {fileID: 21300004, guid: e1f33a5765bc14b1db1a3c28731cf985, type: 3}
   damagedSprites03:
-  - {fileID: 21300000, guid: f8a69e01798b443abbbd4000ba11560b, type: 3}
+  - {fileID: 21300006, guid: b20da2b32549b48529c9fd8c816a1e87, type: 3}
   - {fileID: 21300006, guid: 79629553916d4491d8a84f7d57469a56, type: 3}
   - {fileID: 21300006, guid: 9ade1c3dde88249798c22ec5b504a602, type: 3}
   - {fileID: 21300006, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
   - {fileID: 21300006, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
-  - {fileID: 21300006, guid: 20605623706cf4e1380c2cfb2146218a, type: 3}
+  - {fileID: 21300006, guid: e1f33a5765bc14b1db1a3c28731cf985, type: 3}
   spriteNode: {fileID: 1919088483632320}
   resourcesUI: {fileID: 1786309433302756}
   alive: 1
