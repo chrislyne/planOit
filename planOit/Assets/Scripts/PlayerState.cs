@@ -208,6 +208,7 @@ public class PlayerState : MonoBehaviour {
     {
         gameStopped = true;
         CancelInvoke();
+        GameObject.Find("HUD").SetActive(false);
         Debug.Log("Game stopped with status = " + success);
         if (success)
         {
