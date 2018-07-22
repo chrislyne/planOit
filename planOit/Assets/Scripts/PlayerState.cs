@@ -5,8 +5,9 @@ using planOit;
 
 public class PlayerState : MonoBehaviour {
 
-    public Planet currentPlanet;
-    public int health;
+    public planet currentPlanet;
+    private static readonly int MAX_HEALTH = 1000;
+    private int health = MAX_HEALTH;
     public int healthDamageRate;
 
     public int foodDepletionRate;
@@ -22,6 +23,9 @@ public class PlayerState : MonoBehaviour {
     public ResourceSet resources;
 
     private bool IsHealthDepleting = false;
+
+    private static readonly int MATERIAL_PER_REPAIR = 25;
+    private static readonly int HEALTH_PER_REPAIR = 10;
 
     // Use this for initialization
     void Start() {
@@ -86,7 +90,7 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    public void StartGathering(Planet planet)
+    public void StartGathering(planet planet)
     {
         currentPlanet = planet;
         // Start consuming resources over time
@@ -123,6 +127,15 @@ public class PlayerState : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void TryToRepair()
+    {
+        if (resources.materials > MATERIAL_PER_REPAIR && health < MAX_HEALTH)
+        {
+            resources.materials -= MATERIAL_PER_REPAIR;
+            health += HEALTH_PER_REPAIR;
         }
     }
 
