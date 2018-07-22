@@ -26,6 +26,9 @@ public class PlayerState : MonoBehaviour {
 
     private static readonly int MATERIAL_PER_REPAIR = 25;
     private static readonly int HEALTH_PER_REPAIR = 10;
+    
+    private static readonly int MATERIAL_PER_FUEL = 25;
+    private static readonly int FUEL_PER_REFUEL = 10;
 
     private GameObject popupCanvas;
     private Text popupText;
@@ -209,6 +212,15 @@ public class PlayerState : MonoBehaviour {
         {
             resources.materials -= MATERIAL_PER_REPAIR;
             health += HEALTH_PER_REPAIR;
+        }
+    }
+
+    public void TryToCreateFuel()
+    {
+        if (resources.materials > MATERIAL_PER_FUEL && resources.fuel < ResourceSet.MAX_RESOURCE_AMOUT)
+        {
+            resources.materials -= MATERIAL_PER_FUEL;
+            resources.fuel += FUEL_PER_REFUEL;
         }
     }
 
