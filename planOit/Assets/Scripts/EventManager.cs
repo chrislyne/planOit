@@ -12,7 +12,8 @@ namespace planOit
         BONUS_RESOURCES2,
         RESOURCE_PENALTY,
         ALIEN_ATTACK,
-        COUNT
+        COUNT,
+        CUSTOM
     }
 
     public class EventManager
@@ -20,6 +21,7 @@ namespace planOit
         public static PlanetEventType getRandomEvent()
         {
             return (PlanetEventType)Random.Range(0, (int)PlanetEventType.COUNT);
+            //return (PlanetEventType)1;
         }
     }
 }

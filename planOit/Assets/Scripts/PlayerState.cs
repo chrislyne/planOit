@@ -141,6 +141,9 @@ public class PlayerState : MonoBehaviour {
     {
         switch(eventType)
         {
+            case PlanetEventType.CUSTOM:
+                showPopup(currentPlanet.eventText);
+                break;
             case PlanetEventType.BONUS_RESOURCES:
             case PlanetEventType.BONUS_RESOURCES2:
                 showPopup("Good news everyone! Something good happened and now you have more of something!");

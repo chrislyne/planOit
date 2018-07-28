@@ -25,7 +25,8 @@ public class planet : MonoBehaviour
 
     public ResourceSet resources;
     public bool alive = true;
-    private PlanetEventType planetEvent = PlanetEventType.UNSET;
+    public PlanetEventType planetEvent;
+    public string eventText;
 
     GameObject ship;
     GameObject straw;
@@ -36,7 +37,8 @@ public class planet : MonoBehaviour
     PlayerState playerState;
 
     private Image spriteRenderer;
-    PlanetType planetType;
+    public PlanetType planetType;
+    public bool randomPlanetType = true;
 
     private RectTransform[] resourceIconSizes;
 
@@ -45,7 +47,7 @@ public class planet : MonoBehaviour
     public bool isSpecialPlanet = false;
     public bool isEndPlanet = false; // special & true == start planet
 
-    private enum PlanetType
+    public enum PlanetType
     {
         BACON,
         NACHOS,
@@ -100,7 +102,11 @@ public class planet : MonoBehaviour
             transform.localScale = new Vector3(planetSize, planetSize, planetSize);
 
             //planet sprite
-            planetType = (PlanetType)Random.Range(0, (int)PlanetType.COUNT);
+            if(randomPlanetType == true)
+            {
+                planetType = (PlanetType)Random.Range(0, (int)PlanetType.COUNT);
+            }
+
             spriteRenderer.sprite = sprites[(int)planetType];
 
             resources = new ResourceSet(
@@ -256,7 +262,10 @@ public class planet : MonoBehaviour
             {
                 spriteRenderer.sprite = damagedSprites01[(int)planetType];
                 // Start Event
-                planetEvent = EventManager.getRandomEvent();
+                if(planetEvent == PlanetEventType.UNSET)
+                {
+                    planetEvent = EventManager.getRandomEvent(); 
+                }
                 playerState.startEvent(planetEvent);
                 // Event needs to be permanent in case the user returns
                 switch(planetEvent)
