@@ -109,31 +109,36 @@ public class planet : MonoBehaviour
 
             spriteRenderer.sprite = sprites[(int)planetType];
 
-            resources = new ResourceSet(
-                Random.Range(minResource, maxResource),
-                Random.Range(minResource, maxResource),
-                Random.Range(minResource, maxResource),
-                Random.Range(minResource, maxResource)
-                );
+
+            int food = Random.Range(minResource, maxResource);
+            int oxygen = Random.Range(minResource, maxResource);
+            int materials = Random.Range(minResource, maxResource);
+            int fuel = Random.Range(minResource, maxResource);
+
             switch (planetType)
             {
                 case PlanetType.BACON:
-                    resources.food = Random.Range(minSpecialResource, maxSpecialResource);
+                    food = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.NACHOS:
-                    resources.food = Random.Range(minSpecialResource, maxSpecialResource);
+                    food = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.SPOTTY:
-                    resources.oxygen = Random.Range(minSpecialResource, maxSpecialResource);
+                    oxygen = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.STRIPE:
-                    resources.materials = Random.Range(minSpecialResource, maxSpecialResource);
+                    materials = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
                 case PlanetType.WAVY:
-                    resources.fuel = Random.Range(minSpecialResource, maxSpecialResource);
+                    fuel = Random.Range(minSpecialResource, maxSpecialResource);
                     break;
             }
-
+            resources = new ResourceSet(
+                fuel,
+                oxygen,
+                food,
+                materials
+                );
             // # of Children expected to match # of resource types
             GameObject[] resourceObjects = new GameObject[resourcesUI.transform.childCount];
             resourceIconSizes = new RectTransform[resourcesUI.transform.childCount];
@@ -236,7 +241,16 @@ public class planet : MonoBehaviour
         {
             int resourceValue = resources.getResourceByIndex(c);
             float iconSize = (float)resourceValue / 200.0f + 0.8f;
-            resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
+            if(resourceValue > 0)
+            {
+                resourceIconSizes[c].sizeDelta = new Vector2(iconSize, iconSize);
+            }
+            else
+            {
+                resourceIconSizes[c].sizeDelta = new Vector2(0, 0);
+            }
+                
+
         }
     }
 
@@ -252,7 +266,7 @@ public class planet : MonoBehaviour
                 imageScript.raycastTarget = false;
             }
         }
-        else if (resources.ResourceTotal < 200)
+        else if (resources.ResourceTotal < resources.startingTotal/2f)
         {
             spriteRenderer.sprite = damagedSprites02[(int)planetType];
         }

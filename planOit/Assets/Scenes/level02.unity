@@ -284,7 +284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 8, y: 162.60999}
+  m_AnchoredPosition: {x: 8, y: 162.61035}
   m_SizeDelta: {x: 913.6, y: 106.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68140872
@@ -450,7 +450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.40039, y: -243.1001}
+  m_AnchoredPosition: {x: 59.40039, y: -243.09961}
   m_SizeDelta: {x: 50, y: 1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &162368453
@@ -1575,6 +1575,11 @@ Prefab:
       propertyPath: planetEvent
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: maxResource
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
   m_IsPrefabParent: 0
@@ -1851,6 +1856,11 @@ Prefab:
       propertyPath: isEndPlanet
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: maxResource
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
   m_IsPrefabParent: 0
@@ -1886,7 +1896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.40039, y: -110.85986}
+  m_AnchoredPosition: {x: 59.40039, y: -110.859375}
   m_SizeDelta: {x: 50, y: 1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1073860832
@@ -1990,6 +2000,26 @@ Prefab:
       propertyPath: planetEvent
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: maxResource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: maxSpecialResource
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: minSpecialResource
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: minResource
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
   m_IsPrefabParent: 0
@@ -2025,7 +2055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 31.40039, y: -226.6001}
+  m_AnchoredPosition: {x: 31.40039, y: -226.59961}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226470078
@@ -2476,6 +2506,16 @@ Prefab:
       propertyPath: isSpecialPlanet
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: maxSpecialResource
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114138678724939256, guid: fee4c8310d4c04396b6858996c98d1fd,
+        type: 2}
+      propertyPath: minResource
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fee4c8310d4c04396b6858996c98d1fd, type: 2}
   m_IsPrefabParent: 0
@@ -2604,7 +2644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.40039, y: -110.85986}
+  m_AnchoredPosition: {x: 59.40039, y: -110.859375}
   m_SizeDelta: {x: 10, y: 1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1602320607
@@ -3446,7 +3486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 178.59961, y: -223.8999}
+  m_AnchoredPosition: {x: 178.59961, y: -223.90039}
   m_SizeDelta: {x: 239.3, y: 39.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962206857
@@ -3520,7 +3560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 59.40039, y: -243.1001}
+  m_AnchoredPosition: {x: 59.40039, y: -243.09961}
   m_SizeDelta: {x: 5, y: 1}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1986561111
@@ -3588,7 +3628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 31.40039, y: -293.6001}
+  m_AnchoredPosition: {x: 31.40039, y: -293.5996}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1987572216
@@ -3756,6 +3796,10 @@ MonoBehaviour:
   - {fileID: 1986561109}
   - {fileID: 948197645}
   healthBar: {fileID: 769191104}
+  fuelStart: 400
+  oxygenStart: 250
+  foodStart: 250
+  materialStart: 0
 --- !u!4 &2062427651
 Transform:
   m_ObjectHideFlags: 0

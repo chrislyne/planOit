@@ -21,7 +21,6 @@ namespace planOit
         public static PlanetEventType getRandomEvent()
         {
             return (PlanetEventType)Random.Range(0, (int)PlanetEventType.COUNT);
-            //return (PlanetEventType)1;
         }
     }
 }

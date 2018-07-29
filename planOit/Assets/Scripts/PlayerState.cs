@@ -21,6 +21,10 @@ public class PlayerState : MonoBehaviour {
     public GameObject healthBar;
 
     public ResourceSet resources;
+    public int fuelStart = 250;
+    public int oxygenStart = 250;
+    public int foodStart = 250;
+    public int materialStart = 250;
 
     private bool IsHealthDepleting = false;
 
@@ -40,7 +44,7 @@ public class PlayerState : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        resources = new ResourceSet(250, 250, 250, 250);
+        resources = new ResourceSet(fuelStart, oxygenStart, foodStart, materialStart);
         InvokeRepeating("ExpendResources", 0, 0.75f);
 
         popupCanvas = GameObject.Find("PopUpCanvas");
@@ -122,6 +126,7 @@ public class PlayerState : MonoBehaviour {
         else
         {
             // Start consuming resources over time
+
             InvokeRepeating("consumeFromCurrentPlanet", 0.5f, 0.5f);
         }
     }

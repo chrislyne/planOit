@@ -7,7 +7,7 @@
     public int fuel;
     public int materials;
 
-    private int startingTotal;
+    public int startingTotal;
 
     public bool ResourceDepleted
     {
